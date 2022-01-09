@@ -39,6 +39,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="AuthenticationService.cs" />
+        <Compile Include="Holiday.cs" />
+        <Compile Include="IProfile.cs" />
+        <Compile Include="IToken.cs" />
         <Compile Include="OrderService.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
