@@ -7,11 +7,13 @@ namespace Lib
     {
         private readonly IProfile _profile;
         private readonly IToken _token;
+        private readonly INotification _notification;
 
-        public AuthenticationService()
+        public AuthenticationService(IProfile profile, IToken token, INotification notification)
         {
-            _profile = new FakeProfileDao();
-            _token = new FakeTokenDao();
+            _profile = profile;
+            _token = token;
+            _notification = notification;
         }
 
         public bool IsValid(string account, string password)
@@ -28,8 +30,17 @@ namespace Lib
 
             if (isValid)
                 return true;
-            return false;
+            else
+            {
+                _notification.Send($"Account:{account} try to login failed.");
+                return false;
+            }
         }
+    }
+
+    public interface INotification
+    {
+        void Send(string msg);
     }
 
     internal class FakeProfileDao : IProfile
